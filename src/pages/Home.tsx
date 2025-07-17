@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import HomeButton from '../components/HomeButton';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -10,7 +11,9 @@ const Home: React.FC = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
+      position: 'relative',
     }}>
+      <HomeButton />
       <h1>Willkommen zur Spanisch-Flashcards-App!</h1>
       <div style={{ margin: '2rem 0' }}>
         <button style={{ margin: '0.5rem', padding: '1rem 2rem' }} onClick={() => navigate('/study')}>Study Mode</button>

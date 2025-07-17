@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CategorySelection from './CategorySelection';
 import { flashcards } from '../data/flashcards';
 import Flashcard from '../components/Flashcard';
+import HomeButton from '../components/HomeButton';
 
 const Study: React.FC = () => {
   const [category, setCategory] = useState<string | null>(null);
@@ -32,7 +33,9 @@ const Study: React.FC = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
+      position: 'relative',
     }}>
+      <HomeButton />
       <h2>Study Mode: {category}</h2>
       <div style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
         Karte {current + 1} von {cards.length}

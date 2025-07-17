@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+# Testing
+- once your are done making changes to the codebase, run all the tests and ensure they pass.
