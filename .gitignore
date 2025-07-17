@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Test results
+# Playwright
+/test-results/
+*.webm
+*.png
+trace.zip
+
+# Coverage
+coverage/
+
+# Env files
+.env

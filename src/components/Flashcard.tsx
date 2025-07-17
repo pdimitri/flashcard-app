@@ -72,7 +72,7 @@ const Flashcard: React.FC<FlashcardProps> = ({ spanish, english, resetTrigger })
         }}
       >
         <div style={sideStyle}>{spanish}</div>
-        <div style={backStyle}>{showBack ? english : ''}</div>
+        <div style={backStyle} data-testid="flashcard-back">{showBack ? english : ''}</div>
       </div>
     </div>
   );
