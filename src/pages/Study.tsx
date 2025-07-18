@@ -1,3 +1,4 @@
+// Study page for selecting a category and studying flashcards
 import React, { useState } from 'react';
 import CategorySelection from './CategorySelection';
 import { flashcards } from '../data/flashcards';
@@ -5,39 +6,38 @@ import Flashcard from '../components/Flashcard';
 import HomeButton from '../components/HomeButton';
 
 const Study: React.FC = () => {
+  // State for the selected category
   const [category, setCategory] = useState<string | null>(null);
+  // State for the current card index
   const [current, setCurrent] = useState(0);
 
+  // Show category selection if no category is chosen
   if (!category) {
     return <CategorySelection onSelectCategory={setCategory} />;
   }
 
+  // Filter cards by selected category
   const cards = flashcards.filter((c) => c.category === category);
   if (cards.length === 0) {
     return <div>Keine Karten in dieser Kategorie.</div>;
   }
 
+  // Go to next card
   const handleNext = () => {
     setCurrent((prev) => (prev + 1) % cards.length);
   };
 
+  // Go back to category selection
   const handleBack = () => {
     setCategory(null);
     setCurrent(0);
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      position: 'relative',
-    }}>
+    <div className="study-container">
       <HomeButton />
       <h2>Study Mode: {category}</h2>
-      <div style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
+      <div className="study-progress">
         Karte {current + 1} von {cards.length}
       </div>
       <Flashcard
@@ -45,9 +45,9 @@ const Study: React.FC = () => {
         english={cards[current].english}
         resetTrigger={current}
       />
-      <div style={{ display: 'flex', gap: '2rem', marginTop: '1rem' }}>
-        <button onClick={handleNext} style={{ padding: '0.8rem 2rem' }}>Nächste Karte</button>
-        <button onClick={handleBack} style={{ padding: '0.8rem 2rem' }}>Zurück zur Kategorieauswahl</button>
+      <div className="study-controls">
+        <button onClick={handleNext} className="study-button">Nächste Karte</button>
+        <button onClick={handleBack} className="study-button">Zurück zur Kategorieauswahl</button>
       </div>
     </div>
   );

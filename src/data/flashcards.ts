@@ -1,5 +1,12 @@
+// Type for flashcard categories
+export type FlashcardCategory = 'animals' | 'food' | 'verbs';
+
+// List of all available categories
+export const FLASHCARD_CATEGORIES: FlashcardCategory[] = ['animals', 'food', 'verbs'];
+
+// Type for a single flashcard
 export type Flashcard = {
-  category: 'animals' | 'food' | 'verbs';
+  category: FlashcardCategory;
   spanish: string;
   english: string;
   quiz: {
@@ -8,8 +15,9 @@ export type Flashcard = {
   };
 };
 
+// Array of all flashcards used in the app
 export const flashcards: Flashcard[] = [
-  // Tiere
+  // Animals
   {
     category: 'animals',
     spanish: 'el gato',
@@ -37,7 +45,7 @@ export const flashcards: Flashcard[] = [
       options: ['the bird', 'the horse', 'the apple', 'the fish'],
     },
   },
-  // Essen
+  // Food
   {
     category: 'food',
     spanish: 'la manzana',
@@ -65,7 +73,7 @@ export const flashcards: Flashcard[] = [
       options: ['the cheese', 'the egg', 'the fish', 'the bread'],
     },
   },
-  // Verben
+  // Verbs
   {
     category: 'verbs',
     spanish: 'comer',

@@ -1,59 +1,26 @@
+// Flashcard component for displaying a Spanish-English card with flip animation
 import React, { useState, useEffect } from 'react';
 
 interface FlashcardProps {
   spanish: string;
   english: string;
-  resetTrigger?: any;
+  // Used to reset the card from parent, e.g. when switching cards
+  resetTrigger?: number;
 }
 
-const cardStyle: React.CSSProperties = {
-  width: '320px',
-  height: '200px',
-  perspective: '1000px',
-  margin: '2rem auto',
-  cursor: 'pointer',
-};
-
-const innerStyle: React.CSSProperties = {
-  position: 'relative',
-  width: '100%',
-  height: '100%',
-  transition: 'transform 0.5s',
-  transformStyle: 'preserve-3d',
-};
-
-const sideStyle: React.CSSProperties = {
-  position: 'absolute',
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  background: '#fff',
-  color: '#222',
-  borderRadius: '16px',
-  boxShadow: '0 2px 16px rgba(0,0,0,0.15)',
-  fontSize: '2rem',
-  backfaceVisibility: 'hidden',
-  userSelect: 'none',
-};
-
-const backStyle: React.CSSProperties = {
-  ...sideStyle,
-  background: '#8E92FF',
-  color: '#fff',
-  transform: 'rotateY(180deg)',
-};
-
 const Flashcard: React.FC<FlashcardProps> = ({ spanish, english, resetTrigger }) => {
+  // State to track if the card is flipped
   const [flipped, setFlipped] = useState(false);
+  // State to delay showing the back side (for animation)
   const [showBack, setShowBack] = useState(false);
 
+  // Reset the card when resetTrigger changes
   useEffect(() => {
     setFlipped(false);
     setShowBack(false);
   }, [resetTrigger]);
 
+  // Show the back side with a delay after flipping
   useEffect(() => {
     if (flipped) {
       const timeout = setTimeout(() => setShowBack(true), 250);
@@ -64,15 +31,19 @@ const Flashcard: React.FC<FlashcardProps> = ({ spanish, english, resetTrigger })
   }, [flipped]);
 
   return (
-    <div style={cardStyle} onClick={() => setFlipped((f) => !f)}>
+    <div
+      className="flashcard"
+      onClick={() => setFlipped((f) => !f)}
+      aria-label="Flip flashcard"
+    >
       <div
-        style={{
-          ...innerStyle,
-          transform: flipped ? 'rotateY(180deg)' : 'none',
-        }}
+        className="flashcard-inner"
+        style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}
       >
-        <div style={sideStyle}>{spanish}</div>
-        <div style={backStyle} data-testid="flashcard-back">{showBack ? english : ''}</div>
+        <div className="flashcard-side">{spanish}</div>
+        <div className="flashcard-side flashcard-back" data-testid="flashcard-back">
+          {showBack ? english : ''}
+        </div>
       </div>
     </div>
   );

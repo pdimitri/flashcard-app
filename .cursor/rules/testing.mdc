@@ -3,3 +3,7 @@ alwaysApply: true
 ---
 # Testing
 - once your are done making changes to the codebase, run all the tests and ensure they pass.
+
+# Comments
+- Key parts of the code should have comments in english explaining what the code does
+
